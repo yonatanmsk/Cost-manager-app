@@ -3,6 +3,9 @@ let Cost = require('../models/cost.model');
 let Computes = require('../models/compute.model');
 const { v4: uuidv4 } = require('uuid');
 
+let tempCost = [];
+let computeSum;
+
 // get all the collection of the Cost Object
 router.route('/').get((req, res) => {
   Cost.find()
@@ -49,9 +52,6 @@ router.route('/add').post((req, res) => {
 
 // Get Cost by Year, Month & user_identifier
 router.route('/user_identifier/:user_identifier/year/:year/month/:month').get((req, res) => {
-
-  let tempCost = [];
-  let computeSum;
   
   //if the user want to see all costs in a year
   if (req.params.month === 'All') {
