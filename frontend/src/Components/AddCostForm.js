@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { StyledInput } from "./Styles/Input.Styled";
 
-const AddCostForm = ({ categoryOptions, currentDate, monthOptions, user_identifier }) => {
+const AddCostForm = ({ categoryOptions, currentDate, monthOptions, userIdentifier }) => {
 
     const [selectDate, setSelectDate] = useState(currentDate);
     const [description, setDescription] = useState("");
@@ -41,7 +41,7 @@ const AddCostForm = ({ categoryOptions, currentDate, monthOptions, user_identifi
         }
         setFormErrors(errors);
         if (Object.keys(errors).length === 0) {
-            const cost = { category, description, sum, month, year, user_identifier };
+            const cost = { category, description, sum, month, year, userIdentifier };
             console.log(JSON.stringify(cost));
             fetch("http://localhost:5000/costs/add", {
                 method: "POST",

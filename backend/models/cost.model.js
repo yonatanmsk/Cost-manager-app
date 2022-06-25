@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 //Creating new item for adding to the user's list of
 //items and set its properties
 const costSchema = new Schema({
-  cost_id: { type: String},
-  user_identifier: {type: String},
+  costId: { type: String},
+  userIdentifier: {type: String},
   description: { type: String},
   category: { type: String},
   sum: { type: Number},

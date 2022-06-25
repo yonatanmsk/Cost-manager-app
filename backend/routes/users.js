@@ -12,18 +12,18 @@ router.route('/').get((req, res) => {
 // Adding a new user by login method or register option 
 router.route('/add').post((req, res) => {
 
-  const username = req.body.username;
-  const user_id = req.body.user_id;
-  const first_name = req.body.first_name;
-  const last_name = req.body.last_name;
+  const userName = req.body.userName;
+  const userId = req.body.userId;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
   const birthday = req.body.birthday;
-  const marital_status = req.body.marital_status;
-  const user_identifier = uuidv4();
+  const maritalStatus = req.body.maritalStatus;
+  const userIdentifier = uuidv4();
 
   // Creating a new user with its properties for saving in mongoDB
   const newUser = new User({
-    username, user_id, first_name, last_name,
-    birthday, marital_status, user_identifier
+    userName, userId, firstName, lastName,
+    birthday, maritalStatus, userIdentifier
   });
  
   // Save user information to the collection in mongoDB for login option 
@@ -33,9 +33,9 @@ router.route('/add').post((req, res) => {
 });
 
 // Search after a specific user for fetching data 
-router.route('/username/:username/userid/:userid').get((req, res) => {
+router.route('/userName/:userName/userId/:userId').get((req, res) => {
 
-  User.find({ 'username': req.params.username, 'userid': req.params.userid })
+  User.find({ 'userName': req.params.userName, 'userId': req.params.userId })
     .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));
 });

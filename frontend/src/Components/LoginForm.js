@@ -7,12 +7,12 @@ import { LoginContainer } from './Styles/Container.styled';
 
 const LoginForm = ({ setUserIdentifier }) => {
 
-    const [user_id, setId] = useState("");
-    const [username, setUsername] = useState("");
-    const [last_name, setLastName] = useState("");
+    const [userId, setId] = useState("");
+    const [userName, setUsername] = useState("");
+    const [lastName, setLastName] = useState("");
     const [birthday, setBirthday] = useState("");
-    const [first_name, setFirstName] = useState("");
-    const [marital_status, setMaritalStatus] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [maritalStatus, setMaritalStatus] = useState("");
     const [user, setUser] = useState({});
 
     const [formErrors, setFormErrors] = useState({});
@@ -20,9 +20,9 @@ const LoginForm = ({ setUserIdentifier }) => {
     const [pageMassage, setPageMassage] = useState("");
 
     useEffect(() => {
-        const user_id = window.localStorage.getItem("USER_ID");
-        if (user_id != "") {
-            setUserIdentifier(JSON.parse(user_id))
+        const userId = window.localStorage.getItem("USER_ID");
+        if (userId != "") {
+            setUserIdentifier(JSON.parse(userId))
         }
     }, [])
 
@@ -30,24 +30,24 @@ const LoginForm = ({ setUserIdentifier }) => {
     const onRegister = () => {
         const errors = {};
 
-        if (!username.trim() || username.trim().length < 3) {
-            errors.username = "Min 3 characters required";
+        if (!userName.trim() || userName.trim().length < 3) {
+            errors.userName = "Min 3 characters required";
         }
-        if (!first_name.trim() || first_name.trim().length < 2) {
-            errors.first_name = "Min 2 characters required";
+        if (!firstName.trim() || firstName.trim().length < 2) {
+            errors.firstName = "Min 2 characters required";
         }
-        if (!user_id.trim() || user_id.trim().length < 9) {
-            errors.user_id = "Min 9 characters required";
+        if (!userId.trim() || userId.trim().length < 9) {
+            errors.userId = "Min 9 characters required";
         }
-        if (!last_name.trim() || last_name.trim().length < 2) {
-            errors.last_name = "Min 2 characters required";
+        if (!lastName.trim() || lastName.trim().length < 2) {
+            errors.lastName = "Min 2 characters required";
         }
         if (!birthday.trim()) {
             errors.birthday = "Please choose a date";
         }
         setFormErrors(errors);
         if (Object.keys(errors).length === 0) {
-            const newUser = {username, user_id, first_name, last_name, birthday, marital_status};
+            const newUser = {userName, userId, firstName, lastName, birthday, maritalStatus};
             console.log(JSON.stringify(newUser))
             fetch("http://localhost:5000/users/add", {
                 method: "POST",
@@ -65,11 +65,11 @@ const LoginForm = ({ setUserIdentifier }) => {
     const onLogin = () => {
         const errors = {};
 
-        if (!username.trim() || username.trim().length < 3) {
-            errors.username = "Min 3 characters required";
+        if (!userName.trim() || userName.trim().length < 3) {
+            errors.userName = "Min 3 characters required";
         }
-        if (!user_id.trim() || user_id.trim().length < 9) {
-            errors.user_id = "Min 9 characters required";
+        if (!userId.trim() || userId.trim().length < 9) {
+            errors.userId = "Min 9 characters required";
         }
         setFormErrors(errors);
         if (Object.keys(errors).length === 0) {
@@ -78,7 +78,7 @@ const LoginForm = ({ setUserIdentifier }) => {
             getUser().then(result => setUser(result[0])); // FIX 2 CLICKS
             if (usere != null) {
                 setPageMassage("Login Successfully");
-                setUserIdentifier(user.user_identifier);
+                setUserIdentifier(user.userIdentifier);
             }
             else { setPageMassage("Check login info"); }
         }
@@ -91,7 +91,7 @@ const LoginForm = ({ setUserIdentifier }) => {
     }
 
     const fetchUserFromDB = async () => {
-        const url = "http://localhost:5000/users/username/" + username + "/userid/" + user_id;
+        const url = "http://localhost:5000/users/userName/" + userName + "/userId/" + userId;
         const response = await fetch(url);
         const data = response.json();
         return data;
@@ -116,16 +116,16 @@ const LoginForm = ({ setUserIdentifier }) => {
             <SmallFlex>
                 <div className='FormControl' style={{ paddingTop: "10px" }}>
                     <label>Username</label>
-                    <StyledInput className="Username">
+                    <StyledInput className="UserName">
                         <input
                             minLength={3}
                             type="text"
                             placeholder="Username"
                             required
-                            value={username}
+                            value={userName}
                             onChange={(e) => setUsername(e.target.value)}
                         ></input>
-                        <p>{formErrors.username}</p>
+                        <p>{formErrors.userName}</p>
                     </StyledInput>
                 </div>
                 {isRegister && <div className='FormControl' style={{ paddingTop: "10px" }}>
@@ -136,7 +136,7 @@ const LoginForm = ({ setUserIdentifier }) => {
                             placeholder="First Name"
                             minLength={2}
                             required
-                            value={first_name}
+                            value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                         ></input>
                         <p>{formErrors.firstName}</p>
@@ -153,10 +153,10 @@ const LoginForm = ({ setUserIdentifier }) => {
                             minLength={9}
                             min={0}
                             required
-                            value={user_id}
+                            value={userId}
                             onChange={(e) => setId(e.target.value)}
                         ></input>
-                        <p>{formErrors.user_id}</p>
+                        <p>{formErrors.userId}</p>
                     </StyledInput>
                 </div>
                 {isRegister && <div className='FormControl' style={{ paddingTop: "0px" }}>
@@ -167,7 +167,7 @@ const LoginForm = ({ setUserIdentifier }) => {
                             placeholder="Last Name"
                             minLength={2}
                             required
-                            value={last_name}
+                            value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                         ></input>
                         <p>{formErrors.lastName}</p>

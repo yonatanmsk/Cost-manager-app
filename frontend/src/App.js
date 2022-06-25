@@ -63,7 +63,7 @@ function App() {
             categoryOptions={categoryOptions}
             currentDate={currentDate}
             monthOptions={monthsOptoins}
-            user_identifier={userIdentifier} />}
+            userIdentifier={userIdentifier} />}
           <Flex className="ContainersFlex">
             <CostContainer>
               <label>Costs</label>

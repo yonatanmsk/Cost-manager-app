@@ -10,13 +10,13 @@ router.route('/').get((req, res) => {
 
 // function that adds a new collection of computes with POST method
 router.route('/add').post((req, res) => {
-  const user_identifier = req.body.user_identifier;
+  const userIdentifier = req.body.userIdentifier;
   const sum = Number(req.body.sum);
   const year = req.body.year;
   const month = req.body.month;
 
   const newComputes = new Computes({
-    user_identifier,
+    userIdentifier,
     sum,
     year,
     month
